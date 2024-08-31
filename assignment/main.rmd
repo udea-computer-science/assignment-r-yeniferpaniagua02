@@ -1,0 +1,108 @@
+getwd()
+setwd(dir = "/workspaces/assignment-r-yeniferpaniagua02/assignment")
+
+```{r}
+# Series
+# Punto 1
+#Definimos la función
+serie1 <- function(n){
+  suma1 <- 0
+  for (i in seq(1,n)){
+    suma1 <- suma1 + ((-1)^(i))*tanh(i)
+  }
+  print(suma1)
+}
+x1 <- seq(1,100,5)
+y1<- sapply(x1,serie1)
+
+plot(x1,y1, type = "o")
+```
+
+```{r}
+min(y1)
+max(y1)
+```
+```{r}
+# Punto 2
+#Definimos la función
+serie2 <- function(n){
+  suma2 <- 0
+  for (i in seq(1,n)){
+    suma2 <- suma2 + atan(i)^(2)/((i^2)+1)
+  }
+  print(suma2)
+}
+
+x2 <- seq(1,100)
+y2<- sapply(x2,serie2)
+
+plot(x2,y2, type = "o")
+```
+```{r}
+max(y2)
+```
+```{r}
+# Punto 3
+#Definimos la función factorial
+mi.factorial <- function(n){
+    result <- n
+    i <- n
+    while (i>1){
+        result <- (i-1)*result
+        i = i-1
+    }
+    return(result)
+}
+
+#Definimos funcion de la serie
+serie3 <- function(n){
+  suma3 <- 0
+  for (i in seq(2,n)){
+    suma3 <- suma3+log(mi.factorial(i),i)/ (i^3)
+  }
+  print(suma3)
+}
+
+x3 <- seq(2,100)
+y3<- sapply(x3,serie3)
+
+plot(x3,y3, type = "o")
+```
+```{r}
+max(y3)
+```
+```{r}
+#Punto 4
+# Definimos la función
+serie4<- function(x, n) {
+  sum(sapply(0:n, function(i) {
+    ((-1)^i / factorial(2*i + 1)) * x^(2*i + 1)
+  }))
+}
+
+#Ensayamos la funcion
+n <- 100
+x4 <- seq(-pi, pi, length.out = 100)
+y4 <- sapply(x4, function(x) serie4(x, n))
+sin_values <- sin(x4)
+
+# Graficar los resultados
+plot(x4, sin_values, type = "l", col = "blue", lwd = 6, ylab = "sin(x)", xlab = "x")
+lines(x4, y4, col = "red", lwd = 4, lty = 2)
+
+```
+```{r}
+#Tratamiento del archivo csv
+datos <- read.table("data.csv", header = F, sep = "\t")
+head(datos,5)
+```
+```{r}
+#Punto 1 
+sum(datos$V2)
+```
+```{r}
+table(datos$V1)
+```
+```{r}
+tapply(datos$V2, datos$V1, sum)
+```
